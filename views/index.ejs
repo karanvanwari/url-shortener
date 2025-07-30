@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Shortener</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">URL Shortener</h1>
+
+    <!-- Form to submit new URL -->
+    <form action="/shortUrls" method="POST" class="form-inline mb-4">
+      <input
+        type="url"
+        name="fullUrl"
+        id="fullUrl"
+        class="form-control mr-2"
+        placeholder="Enter a valid URL"
+        required
+      />
+      <button type="submit" class="btn btn-primary">Shorten</button>
+    </form>
+
+    <!-- Table showing all shortened URLs -->
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Original URL</th>
+          <th>Short URL</th>
+          <th>Clicks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (shortUrls.length === 0) { %>
+          <tr>
+            <td colspan="3" class="text-center">No URLs shortened yet.</td>
+          </tr>
+        <% } else { %>
+          <% shortUrls.forEach(shortUrl => { %>
+            <tr>
+              <td>
+                <a href="<%= shortUrl.full %>" target="_blank" rel="noopener noreferrer">
+                  <%= shortUrl.full %>
+                </a>
+              </td>
+              <td>
+                <a href="http://localhost:5000/<%= shortUrl.short %>" target="_blank" rel="noopener noreferrer">
+                  http://localhost:5000/<%= shortUrl.short %>
+                </a>
+              </td>
+              <td><%= shortUrl.clicks %></td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
