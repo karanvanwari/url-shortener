@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const ShortUrl = require('./models/ShortUrl');
+const ShortUrl = require('./models/shortUrl');
 
 const app = express();
 
